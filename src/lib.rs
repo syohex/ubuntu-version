@@ -1,4 +1,6 @@
 use std::process::Command;
+
+#[derive(Debug)]
 pub struct UbuntuVersion {
     pub description: String,
     pub release: String,
@@ -34,12 +36,12 @@ pub fn ubuntu_version() -> Option<UbuntuVersion> {
             }
 
             distributor_found = true;
-        } else if line.starts_with("Discription:") {
-            description = line.split(":").last().unwrap();
+        } else if line.starts_with("Description:") {
+            description = line.split(":").last().unwrap().trim();
         } else if line.starts_with("Release:") {
-            release = line.split(":").last().unwrap();
+            release = line.split(":").last().unwrap().trim();
         } else if line.starts_with("Codename:") {
-            codename = line.split(":").last().unwrap();
+            codename = line.split(":").last().unwrap().trim();
         }
     }
 
